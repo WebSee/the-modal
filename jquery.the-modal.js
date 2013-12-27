@@ -18,9 +18,7 @@
 			closeOnOverlayClick: true,
 
 			onClose: null,
-			onOpen: null,
-
-			cloning: true
+			onOpen: null
         };
 
 	function lockContainer() {
@@ -55,17 +53,11 @@
 				
 				lockContainer();
 
-				var overlay = $('<div/>').addClass(localOptions.overlayClass).prependTo('body');
+				var overlay = $('<div/>').addClass(localOptions.overlayClass);
 				overlay.data(pluginNamespace+'.options', options);
 
 				if(el) {
-					if (!localOptions.cloning) {
-						overlay.data(pluginNamespace+'.el', el);
-						$(el).data(pluginNamespace+'.parent', $(el).parent());
-						$(el).appendTo(overlay).show();
-					} else {
-						$(el).clone(true).appendTo(overlay).show();
-					}
+					$(el).wrap(overlay).show();
 				}
 
 				if(localOptions.closeOnEsc) {
@@ -102,14 +94,7 @@
 				var overlay = $('.' + localOptions.overlayClass);
 				$.extend(localOptions, overlay.data(pluginNamespace+'.options'));
 
-				if (!localOptions.cloning) {
-					if (!el) {
-						el = overlay.data(pluginNamespace+'.el');
-					}
-					$(el).appendTo($(el).data(pluginNamespace+'.parent'));
-				}
-
-				overlay.remove();
+				overlay.children().unwrap();
 				unlockContainer();
 
 				if(localOptions.closeOnEsc) {
