@@ -58,6 +58,7 @@
 
 				if(el) {
 					$(el).wrap(overlay).show();
+					overlay = $(el).parent();
 				}
 
 				if(localOptions.closeOnEsc) {
