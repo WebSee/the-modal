@@ -95,7 +95,7 @@
 				var overlay = $('.' + localOptions.overlayClass);
 				$.extend(localOptions, overlay.data(pluginNamespace+'.options'));
 
-				overlay.children().unwrap();
+				overlay.children().hide().unwrap();
 				unlockContainer();
 
 				if(localOptions.closeOnEsc) {
